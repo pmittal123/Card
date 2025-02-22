@@ -1,0 +1,424 @@
+:root{
+    --sw:8rem;
+    --sh:2rem;
+
+    --cbg:white;
+
+    --cborder:transparent;
+
+    
+    --heart-size-small: 20px;
+    --heart-size-medium: 30px;
+    --heart-size-large: 40px;
+    --animation-duration: 2.5s;
+}
+body,html{
+    background: pink;
+    height: 100%;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+.scloud{
+    position: relative;
+    
+    height: 8rem;
+    width: 10rem;
+    border: 2px solid var(--cborder);
+}
+
+.mcloud{
+    position: relative;
+    height: 12rem;
+    width: 15rem;
+    border: 2px solid var(--cborder);
+}
+.bcloud{
+    position: relative;
+    height: 15rem;
+    width: 20rem;
+    border: 2px solid var(--cborder);
+}
+
+
+.bottom{
+    position: absolute;
+    width: 8.5rem;
+    height: 3.9rem;
+    background-color: var(--cbg);
+    border-radius: 50px;
+    bottom:10px;
+    left: 10px;
+}
+.top>.right{
+    position: absolute;
+    width: 3.9rem;
+    height: 3.9rem;
+    background-color: var(--cbg);
+    right: 40px;
+    top: 30px;
+    border-radius: 50%;
+}
+.top>.left{
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--cbg);
+    left: 30px;
+    top: 40px;
+    border-radius: 50%;
+}
+
+
+
+.mbottom{
+    position: absolute;
+    width: 13.5rem;
+    height: 5.9rem;
+    background-color: var(--cbg);
+    border-radius: 50px;
+    bottom:50px;
+    left: 10px;
+}
+.mbottom2{
+    position: absolute;
+    width: 6rem;
+    height: 6rem;
+    background-color: var(--cbg);
+    border-radius: 50%;
+    bottom:40px;
+    left: 50px;
+}
+.mtop>.right{
+    position: absolute;
+    width: 8rem;
+    height: 8rem;
+    background-color: var(--cbg);
+    right: 40px;
+    top:23px;
+    border-radius: 50%;
+}
+.mtop>.left{
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--cbg);
+    left: 50px;
+    top: 30px;
+    border-radius: 50%;
+}
+
+.bbottom{
+    position: absolute;
+    width: 18.5rem;
+    height: 7rem;
+    background-color: var(--cbg);
+    border-radius: 80px;
+    bottom:10px;
+    left: 10px;
+}
+.btop>.right{
+    position: absolute;
+    width: 4.9rem;
+    height: 4.9rem;
+    background-color: var(--cbg);
+    right: 70px;
+    top: 80px;
+    border-radius: 50%;
+}
+.btop>.left{
+    position: absolute;
+    width: 8.5rem;
+    height: 8.5rem;
+    background-color: var(--cbg);
+    left: 50px;
+    top: 55px;
+    border-radius: 50%;
+}
+
+.s1{
+    top: 25px;
+    left: 25px;
+}
+.s2{
+    top: -250px;
+    left: 450px;
+}
+.s3{
+    top: -550px;
+    left: 250px;
+}
+.s4{
+    top: -1575px;
+    left: 250px;
+}
+
+.m1{
+    top: 25px;
+    left: 25px;
+}
+.m2{
+    top: -725px;
+    left: 325px;
+}
+.m3{
+    top: 25px;
+    left: 25px;
+}
+.m4{
+    top: 25px;
+    left: 25px;
+}
+.b1{
+    top: 25px;
+    left: 25px;
+}
+.b2{
+    top: 25px;
+    left: 25px;
+}
+.b3{
+    top: 25px;
+    left: 25px;
+}
+
+
+
+.scloud,.bcloud,.mcloud{
+    transform: translate(0);
+    animation: float 90s  linear 5s infinite ;
+}
+@keyframes float {
+    0% {
+        transform: translateX(0);
+    }
+    
+    100%{
+        transform: translateX(100vw);
+
+    }
+}
+/* Responsive styling for phones */
+@media (max-width: 600px) {
+    body{
+        overflow: hidden;
+    }
+    .scloud {
+        height: 4rem;
+        width: 6rem;
+        margin: 10px;
+    }
+    .mcloud {
+        margin: 10px;
+        height: 6rem;
+        width: 9rem;
+    }
+    .bcloud {
+        margin: 10px;
+        height: 8rem;
+        width: 12rem;
+    }
+
+    .bottom {
+        width: 5rem;
+        height: 2rem;
+        left: 5px;
+        bottom: 5px;
+    }
+    .top > .right {
+        width: 2rem;
+        height: 2rem;
+        right: 20px;
+        top: 10px;
+    }
+    .top > .left {
+        width: 2rem;
+        height: 2rem;
+        left: 20px;
+        top: 15px;
+    }
+
+    .mbottom {
+        width: 8rem;
+        height: 3rem;
+        left: 5px;
+        bottom: 20px;
+    }
+    .mbottom2 {
+        width: 3rem;
+        height: 3rem;
+        left: 30px;
+        bottom: 14px;
+    }
+    .mtop > .right {
+        width: 4rem;
+        height: 4rem;
+        right: 25px;
+        top: 20px;
+    }
+    .mtop > .left {
+        width: 3rem;
+        height: 3rem;
+        left: 25px;
+        top: 12px;
+    }
+
+    .bbottom {
+        width: 10rem;
+        height: 4rem;
+        left: 5px;
+        bottom: 5px;
+    }
+    .btop > .right {
+        width: 3rem;
+        height: 3rem;
+        right: 50px;
+        top: 35px;
+    }
+    .btop > .left {
+        width: 5rem;
+        height: 5rem;
+        left: 26px;
+        top: 18px;
+    }
+    .s1{
+        left:60px;
+    }
+    .s2{
+        top: -0.5rem;
+        left: 15rem;
+    }
+    .s3{
+        top: -25rem;
+        left: -250px;
+    }
+    .s4{
+        top:-300px;
+        left: 150px;
+    }
+    .m1{
+        left: -150px;
+    }
+    .m2{
+        top: -220px;
+        left: 90px;
+    }
+    .m3{
+        top: -18rem;
+        left: -250px;
+    }
+    .m4{
+        top:-530px;
+        left:-150px;
+    }
+    .b1{
+        top: 180px;
+    }
+    .b2{
+        top:-520px;
+        left:180px;
+    }
+    .b3{
+        top: -19rem;
+        left: 210px;
+    }
+}
+.new{
+   /* background-color: rgba(0, 0, 0, 0.748); just for test*/
+    height: 50px;
+    width: 250px;
+    z-index: 9999;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25%;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    border-radius: 50px;
+    animation: lightShadeChange 20s linear infinite;
+
+}
+
+
+@keyframes lightShadeChange {
+    0% {
+        background-color: transparent;
+        border: none;
+        color: transparent;
+    }  /* Soft Purple */
+    6.67% { 
+        background-color: transparent;
+        border: none;
+        color: transparent;
+        
+    }  /* Sky Blue */
+    13.34% { background-color: #2f9e88; }  /* Medium Teal */
+    20.01% { background-color: #c04b4b; }  /* Warm Maroon */
+    26.68% { background-color: #a05a2c; }  /* Soft Brown */
+    33.35% { background-color: #3a7a87; }  /* Muted Cyan */
+    40.02% { background-color: #a3476d; }  /* Rosy Wine */
+    46.69% { background-color: #57578a; }  /* Lavender Indigo */
+    53.36% { background-color: #8a3570; }  /* Soft Magenta */
+    60.03% { background-color: #4878a9; }  /* Cool Navy */
+    66.7% { background-color: #a04a4a; }  /* Medium Crimson */
+    73.37% { background-color: #3a6978; }  /* Deep Petrol Blue */
+    80.04% { background-color: #b84b75; }  /* Blush Berry */
+    86.71% { background-color: #2d5a82; }  /* Ocean Blue */
+    93.38% { background-color: #7a4a30; }  /* Soft Chocolate */
+    100% { background-color: #7a3b9e; }  /* Back to Soft Purple */
+}
+
+
+.container {
+    z-index: 988888;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.heart {
+    position: absolute;
+    font-size: var(--heart-size-medium);
+    animation: beat var(--animation-duration) infinite ease-in-out;
+    color: #ff0000;
+  }
+  
+  .heart.small {
+    font-size: var(--heart-size-small);
+    animation: beat var(--animation-duration) infinite ease-in-out;
+
+  }
+  
+  .heart.large {
+    font-size: var(--heart-size-large);
+    animation: beat var(--animation-duration) infinite ease-in-out;
+
+  }
+  @keyframes beat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .heart {
+        font-size: calc(var(--heart-size-medium) * 0.8); /* Scale down */
+    }
+
+    .heart.small {
+        font-size: calc(var(--heart-size-small) * 0.8);
+    }
+
+    .heart.large {
+        font-size: calc(var(--heart-size-large) * 0.8);
+    }
+
+    .container {
+        flex-wrap: wrap;
+    }
+}
