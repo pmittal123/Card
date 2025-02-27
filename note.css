@@ -1,0 +1,219 @@
+/* Add these new styles at the beginning of your CSS file */
+.loading {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.loaded {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s ease-in;
+}
+
+.content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 2s ease-in, transform 2s ease-out;
+}
+
+.content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:root {
+    --paper-color: #fff5f5;
+    --line-color: #e74a67;
+    --text-color: #d4145a;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --gradient-start: rgba(255, 182, 193, 0.4); /* Even lighter pink */
+    --gradient-end: rgba(255, 105, 180, 0.3);   /* Softer hot pink */
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    background: 
+        radial-gradient(circle at top left, var(--gradient-start), transparent 70%),
+        radial-gradient(circle at bottom right, var(--gradient-end), transparent 70%),
+        linear-gradient(135deg, rgba(255, 228, 225, 0.6) 0%, rgba(255, 182, 193, 0.4) 100%);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: shimmer 15s infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Dancing Script', cursive;
+    overflow: hidden;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        background-position: 0% 0%, 100% 100%, 0 0;
+    }
+    50% {
+        background-position: 100% 100%, 0% 0%, 0 0;
+    }
+}
+
+.note-container {
+    width: 95%;
+    max-width: 150vmin;  /* Increased from 100vmin for wider notebook */
+    height: 85vmin;      /* Increased height from 70vmin */
+    padding: 10px;  /* Reduced from 20px */
+    margin: auto;
+}
+
+.notebook {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 245, 245, 0.95),
+        rgba(255, 245, 245, 0.85)
+    );
+    border-radius: 15px;    /* Slightly increased for better proportion */
+    box-shadow: 0 15px 35px rgba(212, 20, 90, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    padding: 15px 30px;  /* Reduced padding */
+    box-sizing: border-box;
+    overflow-y: auto;
+    background: var(--paper-color); /* Removed the repeating-linear-gradient */
+    line-height: 1.3; /* Reduced line height */
+}
+
+.content {
+    padding-top: 0; /* Removed top padding */
+}
+
+h1 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 0.5rem; /* Reduced margin */
+    font-size: 2.2rem;  /* Slightly smaller */
+    text-shadow: 2px 2px 4px var(--shadow-color);
+}
+
+.poem-lines {
+    color: var(--text-color);
+    font-size: 1.4rem;  /* Slightly smaller */
+    white-space: pre-line;
+    padding: 0 5px;  /* Reduced padding */
+    text-align: center;
+    letter-spacing: 0.2px;  /* Reduced letter spacing */
+    line-height: 1.3;  /* Tighter line height */
+}
+
+/* Custom Scrollbar */
+.page::-webkit-scrollbar {
+    width: 8px;
+}
+
+.page::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.page::-webkit-scrollbar-thumb {
+    background: var(--line-color);
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .note-container {
+        width: 98%;          /* Increased from 90% */
+        height: 90vmin;      
+        max-width: 110vmin;  /* Increased from 98vmin */
+    }
+
+    .page {
+        padding: 10px 20px;  /* Further reduced padding */
+    }
+
+    h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .poem-lines {
+        font-size: 1rem;
+        padding: 0 5px;
+        line-height: 1.2;
+    }
+}
+
+/* Page Edge Effect */
+.notebook::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        var(--shadow-color),
+        transparent
+    );
+}
+
+/* Remove the existing body::before and body::after hearts */
+body::before,
+body::after {
+    display: none;
+}
+
+/* Update decorative hearts styling */
+.decorative-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    color: rgba(255, 105, 180, 0.7);  /* Changed color and increased opacity */
+    text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);  /* Added glow effect */
+    animation: floatHeart 12s linear infinite;
+}
+
+.heart:nth-child(1) { left: 10%; top: 100%; animation-delay: 0s; font-size: 32px; }  /* Increased sizes */
+.heart:nth-child(2) { left: 30%; top: 100%; animation-delay: -2s; font-size: 40px; }
+.heart:nth-child(3) { left: 50%; top: 100%; animation-delay: -4s; font-size: 28px; }
+.heart:nth-child(4) { left: 70%; top: 100%; animation-delay: -6s; font-size: 36px; }
+.heart:nth-child(5) { left: 85%; top: 100%; animation-delay: -8s; font-size: 30px; }
+.heart:nth-child(6) { left: 15%; top: 100%; animation-delay: -10s; font-size: 34px; }
+
+@keyframes floatHeart {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;  /* Increased max opacity */
+    }
+    90% {
+        opacity: 1;  /* Keep hearts visible longer */
+    }
+    100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+    }
+}

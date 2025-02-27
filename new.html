@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Note</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="note.css">
+    <style>
+        .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            font-size: 24px;
+        }
+        .audio-control.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .audio-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 192, 203, 0.8);
+        }
+        .audio-control.playing {
+            background: rgba(255, 192, 203, 0.6);
+        }
+        .slides {
+            width: 2000%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            animation: slideshow 120s linear infinite; /* Increased duration to 120s for slower movement */
+        }
+
+        @keyframes slideshow {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%); /* Move half the width for smooth loop */
+            }
+        }
+
+        /* Optional: Add pause on hover */
+        .slideshow-container:hover .slides {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="loading">
+    <!-- Update audio element -->
+    <audio id="bgMusic" loop>
+        <source src="photo gallery/poem_final.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Update audio control button -->
+    <div class="audio-control" id="audioControl" onclick="toggleAudio()">
+        🎵
+    </div>
+
+    <div class="note-container">
+        <div class="notebook">
+            <div class="page">
+                <div class="content">
+                    <h1>My Note</h1>
+                    <div class="poem-lines">              
+लोग कहते थे, "चार कदम चलो तो साथ देंगे,"
+इन्होने तो ज़िंदगी में चलना सिखा दिया।
+
+ना माँगा कुछ बदले में, बस
+अपने प्यार और दुलार से इतना काबिल बना दिया।
+चल रहा हूँ अब आपके रास्ते, बस
+आपकी गोद में सिमटना चाहता हूँ।
+
+माँ की ममता और पापा की छवि सा,
+बस आप दोनों की तरह बनना चाहता हूँ।
+
+एक रूप बेक़ायदा तो, दूसरी आपसी है,
+जब भी कहीं चलता हूँ,
+हर घड़ी पहचान आपसे है।
+
+कुछ कहता हूँ तो, हर उम्मीद आपसी है,
+कभी खेल-खेल में, कभी गलती में सही कहकर,
+बस यह छवि मेरी आपसी है।
+
+लिख रहा हूँ यह ख़त सही,
+मगर मेरे हर लफ़्ज़ आपसे हैं।
+कुछ कहूँगा नहीं आपसे,
+मगर मेरी दुआ में आप ही हैं।
+
+छवि हूँ ना आपकी,
+बस मेरे जज़्बात तो अब आपसे ही हैं।
+
+किए थे कुछ कर्म मैंने,
+जो इस रूप में आप दोनों मिले।
+क्या कहूँ मैं अपनी हरकतों पर, मगर फिर भी,
+बस इस जन्म में दो भगवान मिल गए
+और दो नन्हे शैतानों की जान बन गए। 
+💖
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="decorative-hearts">
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+        <div class="heart">♥</div>
+    </div>
+
+    <script>
+        let audioPlaying = false;
+        const bgMusic = document.getElementById('bgMusic');
+        const audioControl = document.getElementById('audioControl');
+        const content = document.querySelector('.content');
+        const poemLines = document.querySelector('.poem-lines');
+        
+        function showContent() {
+            content.style.opacity = '0';
+            poemLines.style.opacity = '0';
+            
+            setTimeout(() => {
+                content.style.opacity = '1';
+                content.style.transition = 'opacity 2s ease-in';
+                
+                setTimeout(() => {
+                    poemLines.style.opacity = '1';
+                    poemLines.style.transition = 'opacity 2s ease-in';
+                }, 1000);
+            }, 2000);
+        }
+        
+        function startAudio() {
+            bgMusic.volume = 1.0;
+            bgMusic.loop = false;
+            bgMusic.play()
+                .then(() => {
+                    audioPlaying = true;
+                    audioControl.classList.add('show', 'playing');
+                    audioControl.innerHTML = '⏸️';
+                })
+                .catch((error) => {
+                    console.log("Audio autoplay failed:", error);
+                    audioControl.classList.add('show');
+                    audioControl.innerHTML = '▶️';
+                });
+        }
+        
+        function toggleAudio() {
+            if (audioPlaying) {
+                bgMusic.pause();
+                audioPlaying = false;
+                audioControl.classList.remove('playing');
+                audioControl.innerHTML = '▶️';
+            } else {
+                bgMusic.play();
+                audioPlaying = true;
+                audioControl.classList.add('playing');
+                audioControl.innerHTML = '⏸️';
+            }
+        }
+
+        // Handle audio end
+        bgMusic.addEventListener('ended', function() {
+            audioPlaying = false;
+            audioControl.classList.remove('playing');
+            audioControl.innerHTML = '▶️';
+        });
+
+        window.addEventListener('load', function() {
+            document.body.classList.remove('loading');
+            document.body.classList.add('loaded');
+            
+            // Start everything after page loads
+            showContent();
+            setTimeout(() => {
+                startAudio();
+                audioControl.classList.add('show');
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

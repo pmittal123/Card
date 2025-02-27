@@ -11,6 +11,7 @@
     --heart-size-medium: 30px;
     --heart-size-large: 40px;
     --animation-duration: 2.5s;
+    --mobile-scale: 0.6; /* Add scale factor for mobile */
 }
 body,html{
     background: pink;
@@ -187,7 +188,7 @@ body,html{
 
 .scloud,.bcloud,.mcloud{
     transform: translate(0);
-    animation: float 90s  linear 5s infinite ;
+    animation: float 90s  linear infinite ;
 }
 @keyframes float {
     0% {
@@ -420,5 +421,82 @@ body,html{
 
     .container {
         flex-wrap: wrap;
+    }
+    body {
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    .scloud, .mcloud, .bcloud {
+        transform: scale(var(--mobile-scale));
+    }
+
+    /* Update cloud positions for mobile */
+    .s1 { top: 5%; left: 5%; }
+    .s2 { top: 15%; left: 60%; }
+    .s3 { top: 35%; left: 10%; }
+    .s4 { top: 55%; left: 70%; }
+    
+    .m1 { top: 20%; left: 40%; }
+    .m2 { top: 45%; left: 5%; }
+    .m3 { top: 65%; left: 55%; }
+    .m4 { top: 85%; left: 15%; }
+    
+    .b1 { top: 25%; left: 15%; }
+    .b2 { top: 50%; left: 60%; }
+    .b3 { top: 75%; left: 20%; }
+
+    /* Adjust button for mobile */
+    .new {
+        width: 180px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+    }
+
+    /* Adjust heart positions */
+    .container {
+        padding: 10px;
+    }
+    
+    .heart {
+        font-size: calc(var(--heart-size-medium) * 0.7);
+    }
+    
+    .heart.small {
+        font-size: calc(var(--heart-size-small) * 0.7);
+    }
+    
+    .heart.large {
+        font-size: calc(var(--heart-size-large) * 0.7);
+    }
+}
+
+/* Add tablet support */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .scloud, .mcloud, .bcloud {
+        transform: scale(0.8);
+    }
+
+    .new {
+        width: 220px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Add landscape mode support */
+@media (max-height: 500px) {
+    .scloud, .mcloud, .bcloud {
+        transform: scale(0.5);
+    }
+
+    .new {
+        top: 80%;
+    }
+
+    body {
+        height: auto;
+        min-height: 100vh;
     }
 }

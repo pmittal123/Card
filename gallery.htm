@@ -1,43 +1,136 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Journey Together</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="gallery.css">
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .start-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: linear-gradient(145deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .start-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="slideshow-container">
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="../photo gallery/song.mp3" type="audio/mpeg">
+        <source src="photo gallery/song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="overlay" id="startOverlay">
+        <button class="start-button" id="startButton">Start Journey ▶️</button>
+    </div>
+    <div class="gallery-container">
         <h1 class="title">Our Beautiful Journey</h1>
-        <div class="slides">
-            <div class="slide"><img src="photo gallery/1.jpg" alt="Memory 1"></div>
-            <div class="slide"><img src="photo gallery/2.jpg" alt="Memory 2"></div>
-            <div class="slide"><img src="photo gallery/3.jpg" alt="Memory 3"></div>
-            <div class="slide"><img src="photo gallery/4.jpg" alt="Memory 4"></div>
-            <div class="slide"><img src="photo gallery/5.jpg" alt="Memory 5"></div>
-            <div class="slide"><img src="photo gallery/6.jpg" alt="Memory 6"></div>
-            <div class="slide"><img src="photo gallery/7.jpg" alt="Memory 7"></div>
-            <div class="slide"><img src="photo gallery/8.jpg" alt="Memory 8"></div>
-            <div class="slide"><img src="photo gallery/9.jpg" alt="Memory 9"></div>
-            <div class="slide"><img src="photo gallery/10.jpg" alt="Memory 10"></div>
-            <div class="slide"><img src="photo gallery/11.jpg" alt="Memory 11"></div>
-            <div class="slide"><img src="photo gallery/12.jpg" alt="Memory 12"></div>
-            <div class="slide"><img src="photo gallery/13.jpg" alt="Memory 13"></div>
-            <div class="slide"><img src="photo gallery/14.jpg" alt="Memory 14"></div>
-            <div class="slide"><img src="photo gallery/15.jpg" alt="Memory 15"></div>
-            <div class="slide"><img src="photo gallery/16.jpg" alt="Memory 16"></div>
-            <div class="slide"><img src="photo gallery/17.jpg" alt="Memory 17"></div>
-            <div class="slide"><img src="photo gallery/18.jpg" alt="Memory 18"></div>
-            <div class="slide"><img src="photo gallery/19.jpg" alt="Memory 19"></div>
-            <div class="slide"><img src="photo gallery/20.jpg" alt="Memory 20"></div>
-        </div>
-        <div class="hearts">
-            <div class="heart"></div>
-            <div class="heart"></div>
-            <div class="heart"></div>
+        <div class="slideshow-container">
+            <div class="slides">
+                <div class="slide"><img src="photo gallery/1.jpg" alt="Memory 1"></div>
+                <div class="slide"><img src="photo gallery/2.jpg" alt="Memory 2"></div>
+                <div class="slide"><img src="photo gallery/3.jpg" alt="Memory 3"></div>
+                <div class="slide"><img src="photo gallery/4.jpg" alt="Memory 4"></div>
+                <div class="slide"><img src="photo gallery/5.jpg" alt="Memory 5"></div>
+                <div class="slide"><img src="photo gallery/6.jpg" alt="Memory 6"></div>
+                <div class="slide"><img src="photo gallery/7.jpg" alt="Memory 7"></div>
+                <div class="slide"><img src="photo gallery/8.jpg" alt="Memory 8"></div>
+                <div class="slide"><img src="photo gallery/9.jpg" alt="Memory 9"></div>
+                <div class="slide"><img src="photo gallery/10.jpg" alt="Memory 10"></div>
+                <div class="slide"><img src="photo gallery/11.jpg" alt="Memory 11"></div>
+                <div class="slide"><img src="photo gallery/12.jpg" alt="Memory 12"></div>
+                <div class="slide"><img src="photo gallery/13.jpg" alt="Memory 13"></div>
+                <div class="slide"><img src="photo gallery/14.jpg" alt="Memory 14"></div>
+                <div class="slide"><img src="photo gallery/15.jpg" alt="Memory 15"></div>
+                <div class="slide"><img src="photo gallery/16.jpg" alt="Memory 16"></div>
+                <div class="slide"><img src="photo gallery/17.jpg" alt="Memory 17"></div>
+                <div class="slide"><img src="photo gallery/18.jpg" alt="Memory 18"></div>
+                <div class="slide"><img src="photo gallery/19.jpg" alt="Memory 19"></div>
+                <div class="slide"><img src="photo gallery/20.jpg" alt="Memory 20"></div>
+            </div>
         </div>
     </div>
+    <div class="next">
+        <h1 class="text">click button after slide show </h1>
+        <a href="new.html"><button>NEXT SURPRISE</button></a>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            const overlay = document.getElementById('startOverlay');
+            const startButton = document.getElementById('startButton');
+            const galleryContainer = document.querySelector('.gallery-container');
+            const nextButton = document.querySelector('.next');
+            
+            // Hide content initially
+            galleryContainer.style.visibility = 'hidden';
+            nextButton.style.visibility = 'hidden';
+            
+            // Function to start everything
+            function startGallery() {
+                bgMusic.volume = 0.7;
+                bgMusic.currentTime = 0;
+                
+                // Force load the audio
+                bgMusic.load();
+                
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('Audio started successfully');
+                        overlay.style.display = 'none';
+                        galleryContainer.style.visibility = 'visible';
+                        nextButton.style.visibility = 'visible';
+                    }).catch(error => {
+                        console.error("Audio play failed:", error);
+                        // Try alternative method
+                        setTimeout(() => {
+                            bgMusic.play().catch(e => console.log('Second attempt failed:', e));
+                        }, 1000);
+                    });
+                }
+            }
+            
+            // Add click event listener to start button
+            startButton.addEventListener('click', startGallery);
+            
+            // Add interaction listener for mobile
+            document.addEventListener('touchstart', function() {
+                if (!bgMusic.playing) {
+                    bgMusic.play().catch(error => console.log('Touch play failed:', error));
+                }
+            }, { once: true });
+            
+            // Keep audio playing
+            bgMusic.addEventListener('ended', function() {
+                bgMusic.currentTime = 0;
+                bgMusic.play().catch(error => console.log('Loop failed:', error));
+            });
+        });
+    </script>
 </body>
 </html>
